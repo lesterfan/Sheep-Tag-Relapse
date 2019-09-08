@@ -83,3 +83,20 @@ public class SurviveDeathHandler extends DeathHandler
         printTimed(SPACE + spirit.getOwner().getNameColored() + "|cffffcc00 has been revived|r", TEXT_DURATION)
         let stp = spirit.getOwner().toSTP()
         revive(spirit.getPos(), stp)
+
+public class SwitchDeathHandler extends DeathHandler
+
+    override function onSheepDeath(unit sheep, unit killer)
+        printTimed("Now running switch onSheepDeath event handler", TEXT_DURATION)
+        let dyingSTP = sheep.getOwner().toSTP()
+        let killingSTP = killer.getOwner().toSTP()
+
+        Teams.sheepPlayers.remove(dyingSTP)
+        Teams.shepherdPlayers.remove(killingSTP)
+        Teams.sheepPlayers.add(killingSTP)
+        Teams.shepherdPlayers.add(dyingSTP)
+
+        destroyFarms(dyingSTP)
+
+    override function onSpiritDeath(unit spirit, unit killer)
+        printTimed("I don't really know how to 'pass' like in Python...", TEXT_DURATION)

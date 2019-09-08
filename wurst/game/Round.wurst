@@ -36,7 +36,10 @@ public class Round
     construct()
         periodic = new PeriodicHandler()
         gameBoard = new SurviveBoard()
-        deathHandler = new SurviveDeathHandler()
+        if Modes.style == Style.SURVIVE
+            deathHandler = new SurviveDeathHandler()
+        else if Modes.style == Style.SWITCH
+            deathHandler = new SwitchDeathHandler()
         farmHandler = new FarmHandler()
         clean()
 

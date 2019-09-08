@@ -12,6 +12,7 @@ import Host
 import Utils
 import Items
 import Modes
+import initlater DeathHandler
 
 function player.displayStats(string header, MapClosure<STPlayer, string> statGetter)
     printTimedToPlayerClear(header, TEXT_DURATION, this)
@@ -146,6 +147,8 @@ init
                         Game.startRound(new Smart(args.dequeue().toInt()))
                     case "-switch"
                         Modes.style = Style.SWITCH
+                        destroy Game.currentRound
+                        Game.currentRound = new Round()
                         printTimed(SPACE_GOLD + "Set mode to|r switch", TEXT_DURATION)
                     case "-survive"
                         Modes.style = Style.SURVIVE
